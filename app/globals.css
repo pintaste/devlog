@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: #818cf8;
+    color: white;
+  }
+}
+
+/* Shiki dual-theme support */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+  font-style: var(--shiki-dark-font-style);
+  font-weight: var(--shiki-dark-font-weight);
+  text-decoration: var(--shiki-dark-text-decoration);
+}
+
+/* Code block wrapper */
+.shiki {
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border: 1px solid;
+  border-color: #e2e8f0;
+}
+
+.dark .shiki {
+  border-color: #1e293b;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.2s step-end infinite;
+}
+
+/* Prose overrides for post content */
+.post-content pre {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 0 !important;
+}
+
+.post-content pre .shiki {
+  margin: 0;
+}
+
+/* Table styles in prose */
+.post-content table {
+  display: block;
+  overflow-x: auto;
+}
