@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/db'
+import { getAllPosts } from '@/lib/data'
 import { siteConfig } from '@/lib/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {

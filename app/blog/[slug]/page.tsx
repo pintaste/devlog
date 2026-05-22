@@ -1,12 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getPostBySlug, getPostSlugs } from '@/lib/db'
+import { getPostBySlug, getPostSlugs } from '@/lib/data'
 import { markdownToHtml } from '@/lib/markdown'
 import { GiscusComments } from '@/components/Giscus'
 import { siteConfig } from '@/lib/config'
-
-export const revalidate = 3600
 
 interface PageProps {
   params: Promise<{ slug: string }>

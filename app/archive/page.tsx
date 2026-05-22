@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/db'
+import { getAllPosts } from '@/lib/data'
 import type { ArchiveGroup } from '@/types'
 
-export const revalidate = 3600
 export const metadata: Metadata = { title: 'Archive' }
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']

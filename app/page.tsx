@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/db'
+import { getAllPosts } from '@/lib/data'
 import { PostCard } from '@/components/PostCard'
 import { Search } from '@/components/Search'
 import { siteConfig } from '@/lib/config'
-
-export const revalidate = 3600
 
 export default function HomePage() {
   const posts = getAllPosts()

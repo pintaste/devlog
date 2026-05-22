@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3'
-import { readFileSync, readdirSync, mkdirSync } from 'fs'
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import matter from 'gray-matter'
@@ -129,4 +129,38 @@ const syncAll = db.transaction(() => {
 
 syncAll()
 console.log(`✓ Synced ${files.length} posts to SQLite (${DB_PATH})`)
+
+const allRows = db.prepare(`SELECT slug, title, description, date, draft, reading_time, content FROM posts ORDER BY date DESC`).all()
+const postsJson = allRows.map(post => {
+  const categories = db.prepare(`
+    SELECT c.name FROM categories c
+    JOIN post_categories pc ON pc.category_id = c.id
+    JOIN posts p ON p.id = pc.post_id
+    WHERE p.slug = ?
+  `).all(post.slug).map(r => r.name)
+
+  const tags = db.prepare(`
+    SELECT t.name FROM tags t
+    JOIN post_tags pt ON pt.tag_id = t.id
+    JOIN posts p ON p.id = pt.post_id
+    WHERE p.slug = ?
+  `).all(post.slug).map(r => r.name)
+
+  return {
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+    date: post.date,
+    draft: post.draft === 1,
+    readingTime: post.reading_time,
+    categories,
+    tags,
+    content: post.content,
+  }
+})
+
+const JSON_PATH = join(DATA_DIR, 'posts.json')
+writeFileSync(JSON_PATH, JSON.stringify({ posts: postsJson }, null, 2))
+console.log(`✓ Exported ${postsJson.length} posts to ${JSON_PATH}`)
+
 db.close()

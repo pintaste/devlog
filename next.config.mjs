@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['better-sqlite3'],
   pageExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  outputFileTracingIncludes: {
+    '/api/feed': ['./data/posts.json'],
+    '/api/search': ['./data/posts.json'],
+  },
   compress: true,
   poweredByHeader: false,
   async headers() {

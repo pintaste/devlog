@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getCategories, getPostsByCategory } from '@/lib/db'
+import { getCategories, getPostsByCategory } from '@/lib/data'
 
-export const revalidate = 3600
 export const metadata: Metadata = { title: 'Categories' }
 
 function formatDate(dateStr: string) {

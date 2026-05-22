@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTags, getPostsByTag } from '@/lib/db'
+import { getTags, getPostsByTag } from '@/lib/data'
 import { TagCloud } from '@/components/TagCloud'
 
-export const revalidate = 3600
 export const metadata: Metadata = { title: 'Tags' }
 
 function formatDate(dateStr: string) {

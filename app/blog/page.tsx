@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
-import { getAllPosts, getCategories, getTags } from '@/lib/db'
+import { getAllPosts, getCategories, getTags } from '@/lib/data'
 import { PostCard } from '@/components/PostCard'
 import { Pagination } from '@/components/Pagination'
 import Link from 'next/link'
 import { siteConfig } from '@/lib/config'
-
-export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Blog',
